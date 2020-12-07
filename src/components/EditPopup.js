@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import '../index.css';
 import { Table, Input, InputNumber, Popconfirm, Form } from 'antd';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fetchRPList
+} from "../features/RelaypointSlice"
 const originData = [];
+
 
 for (let i = 0; i < 100; i++) {
   originData.push({
@@ -12,7 +17,7 @@ for (let i = 0; i < 100; i++) {
     address: `London Park no. ${i}`,
   });
 }
-
+console.log({fetchRPList})
 const EditableCell = ({
   editing,
   dataIndex,
@@ -49,6 +54,8 @@ const EditableCell = ({
 };
 
 const EditableTable = () => {
+  const dispatch = useDispatch();
+  const fetchUsersResult = useSelector((state) => state.fetchUsersResult)
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
@@ -92,8 +99,8 @@ const EditableTable = () => {
 
   const columns = [
     {
-      title: 'name',
-      dataIndex: 'name',
+      title: 'wilaya',
+      dataIndex: 'wilaya',
       width: '25%',
       editable: true,
     },
@@ -162,7 +169,7 @@ const EditableTable = () => {
           },
         }}
         bordered
-        dataSource={data}
+        dataSource={fetchRPList ? fetchRPList : null}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={{
