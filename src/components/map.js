@@ -1,6 +1,7 @@
 import React from "react";
 import '../App.css';
 import { MapContainer, Marker,  TileLayer, Popup } from "react-leaflet";
+import { Icon } from "leaflet";
 import MyPopup from './Popup'
 
 const center = {
@@ -8,7 +9,10 @@ const center = {
     lng: 3.0601882,
   }
   
-
+  export const icon = new Icon({
+    iconUrl: "https://www.flaticon.com/svg/static/icons/svg/1181/1181732.svg",
+    iconSize: [40, 40]
+  });
 function Map (){
 
     return (
@@ -21,6 +25,7 @@ function Map (){
         <Popup>
             <MyPopup />
         </Popup>
+        
         </Marker>
             
       </MapContainer>
